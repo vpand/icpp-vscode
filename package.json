@@ -1,16 +1,33 @@
 {
 	"name": "icpp",
-	"displayName": "Interpreted C++",
+	"displayName": "ICPP - Interpreting C++",
 	"description": "Running C++ in anywhere like a script.",
 	"version": "1.0.0",
-	"publisher": "vpand.com",
-	"repository": "https://github.com/vpand/icpp",
+	"author": {
+		"name": "Jesse Liu"
+	},
+	"icon": "images/vpand.png",
+	"publisher": "VPAND",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vpand/icpp.git"
+	},
+	"bugs": {
+		"url": "https://github.com/vpand/icpp/issues"
+	},
+	"qna": "https://github.com/vpand/icpp/discussions",
 	"license": "GPL-2.0-only",
 	"engines": {
 		"vscode": "^1.74.0"
 	},
 	"categories": [
-		"Other"
+		"Programming Languages"
+	],
+	"keywords": [
+		"C++",
+		"LLVM",
+		"Clang",
+		"Interpreter"
 	],
 	"activationEvents": [],
 	"main": "./out/extension.js",
@@ -18,62 +35,62 @@
 		"configuration": {
 			"title": "ICPP",
 			"properties": {
-				"icpp.root": {
+				"icpp.a.root": {
 					"type": "string",
 					"description": "The icpp product package root directory.",
 					"default": ""
 				},
-				"icpp.args": {
+				"icpp.icpp.args": {
 					"type": "string",
-					"description": "The C++ script arguments will be passed to icpp interpreter, multiple argument should be separated by ','.",
+					"description": "The C++ script arguments will be passed to icpp interpreter.",
 					"default": ""
 				},
-				"icpp.opt": {
+				"icpp.icpp.opt": {
 					"type": "string",
 					"description": "The optimization level passed to clang.",
 					"default": ""
 				},
-				"icpp.includes": {
+				"icpp.a.includes": {
 					"type": "string",
-					"description": "The header include directories passed to clang, multiple paths should be separated by ','.",
+					"description": "The header include directories passed to clang.",
 					"default": ""
 				},
-				"icpp.libdirs": {
+				"icpp.icpp.libdirs": {
 					"type": "string",
-					"description": "The library directories passed to icpp interpreter, multiple paths should be separated by ','.",
+					"description": "The library directories passed to icpp interpreter.",
 					"default": ""
 				},
-				"icpp.frameworkdirs": {
+				"icpp.icpp.frameworkdirs": {
 					"type": "string",
-					"description": "The framework directories passed to icpp interpreter, multiple paths should be separated by ','.",
+					"description": "The framework directories passed to icpp interpreter.",
 					"default": ""
 				},
-				"icpp.shlibs": {
+				"icpp.icpp.shlibs": {
 					"type": "string",
-					"description": "The full name of the dependent dynamic libraries passed to icpp interpreter, multiple files should be separated by ','.",
+					"description": "The full name of the dependent dynamic libraries passed to icpp interpreter.",
 					"default": ""
 				},
-				"icpp.frameworks": {
+				"icpp.icpp.frameworks": {
 					"type": "string",
-					"description": "The framework name of the dependent libraries passed to icpp interpreter, multiple names should be separated by ','.",
+					"description": "The framework name of the dependent libraries passed to icpp interpreter.",
 					"default": ""
 				},
-				"icpp.ip": {
+				"icpp.iopad.ip": {
 					"type": "string",
 					"description": "The running icpp-gadget/icpp-server's IP address.",
 					"default": "127.0.0.1"
 				},
-				"icpp.port": {
+				"icpp.iopad.port": {
 					"type": "string",
 					"description": "The running icpp-gadget/icpp-server's port.",
 					"default": "24703"
 				},
-				"icpp.ndk": {
+				"icpp.iopad.ndk": {
 					"type": "string",
 					"description": "The android ndk root path, default to the parent directory of the ndk-build in PATH.",
 					"default": ""
 				},
-				"icpp.logging": {
+				"icpp.a.logging": {
 					"type": "boolean",
 					"description": "Log the icpp related sub process or not.",
 					"default": true
@@ -103,14 +120,13 @@
 			},
 			{
 				"command": "extension.icpp.fire",
-				"key": "ctrl+f",
-				"mac": "cmd+f",
+				"key": "ctrl+shift+f",
+				"mac": "cmd+shift+f",
 				"when": "editorTextFocus"
 			},
 			{
 				"command": "extension.icpp.format",
-				"key": "ctrl+shift+f",
-				"mac": "cmd+shift+f",
+				"key": "alt+shift+f",
 				"when": "editorTextFocus"
 			}
 		]

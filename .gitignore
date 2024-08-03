@@ -44,3 +44,4 @@ node_modules/
 # icpp interpretable object
 *.io
 *.icpp
+*.vsix

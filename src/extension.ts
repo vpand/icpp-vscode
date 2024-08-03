@@ -15,22 +15,19 @@ class ICPP {
 	// cli path
 	icpp:string;
 	iopad:string;
-	// logging switch
-	logging:boolean;
 
 	constructor() {
 		this.output = vscode.window.createOutputChannel('ICPP'); 
 		this.exe = os.platform() != 'win32' ? '' : '.exe';
-		this.logging = this.getConfigBool('logging');
 
-		const root = this.getConfig('root');
+		const root = this.getConfig('a.root');
 		if (root.length) {
 			this.log("Using icpp package " + root + ".");
 			this.icpp = path.join(root, 'bin', 'icpp' + this.exe);
 			this.iopad = path.join(root, 'bin', 'iopad' + this.exe);
 		}
 		else {
-			if (this.logging)
+			if (this.logging())
 				this.log("Warning: you haven't set the icpp package root directory, please make sure ICPP_ROOT/bin is in your system PATH environment.");
 			this.icpp = 'icpp';
 			this.iopad = 'iopad';
@@ -38,6 +35,10 @@ class ICPP {
 	}
 
 	dispose() {}
+
+	logging() {
+		return this.getConfigBool('a.logging');
+	}
 
 	log(msg: string) {
 		this.output.appendLine(msg);
@@ -65,7 +66,7 @@ class ICPP {
 	}
 
 	command(cmd: string) {
-		if (this.logging)
+		if (this.logging())
 			this.log(cmd_separator + cmd + '\n');
 	
 		cp.exec(cmd, (error, stdout, stderr) => {
@@ -76,7 +77,7 @@ class ICPP {
 	}
 
 	execute(exe: string, args:string[]) {
-		if (this.logging) {
+		if (this.logging()) {
 			var cmd = exe;
 			for (let a of args)
 				cmd += ' ' + a;
@@ -107,16 +108,16 @@ class ICPP {
 
 		activeDocument.save().then(() => {
 			const filepath = activeDocument.fileName;
-			const argv = this.getConfigList('args');
-			const opt = this.getConfig('opt');
-			const incs = this.getConfigList('includes');
-			const libds = this.getConfigList('libdirs');
-			const frameworkds = this.getConfigList('frameworkdirs');
-			const shlibs = this.getConfigList('shlibs');
-			const frameworks = this.getConfigList('frameworks');
-			const ip = this.getConfig('ip');
-			const port = this.getConfig('port');
-			const ndk = this.getConfig('ndk');
+			const argv = this.getConfigList('icpp.args');
+			const opt = this.getConfig('icpp.opt');
+			const incs = this.getConfigList('a.includes');
+			const libds = this.getConfigList('icpp.libdirs');
+			const frameworkds = this.getConfigList('icpp.frameworkdirs');
+			const shlibs = this.getConfigList('icpp.shlibs');
+			const frameworks = this.getConfigList('icpp.frameworks');
+			const ip = this.getConfig('iopad.ip');
+			const port = this.getConfig('iopad.port');
+			const ndk = this.getConfig('iopad.ndk');
 			var exe = '';
 			var args:string[] = [];
 			switch (action) {
