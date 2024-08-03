@@ -1,0 +1,132 @@
+{
+	"name": "icpp",
+	"displayName": "Interpreted C++",
+	"description": "Running C++ in anywhere like a script.",
+	"version": "1.0.0",
+	"publisher": "vpand.com",
+	"repository": "https://github.com/vpand/icpp",
+	"license": "GPL-2.0-only",
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [],
+	"main": "./out/extension.js",
+	"contributes": {
+		"configuration": {
+			"title": "ICPP",
+			"properties": {
+				"icpp.root": {
+					"type": "string",
+					"description": "The icpp product package root directory.",
+					"default": ""
+				},
+				"icpp.args": {
+					"type": "string",
+					"description": "The C++ script arguments will be passed to icpp interpreter, multiple argument should be separated by ','.",
+					"default": ""
+				},
+				"icpp.opt": {
+					"type": "string",
+					"description": "The optimization level passed to clang.",
+					"default": ""
+				},
+				"icpp.includes": {
+					"type": "string",
+					"description": "The header include directories passed to clang, multiple paths should be separated by ','.",
+					"default": ""
+				},
+				"icpp.libdirs": {
+					"type": "string",
+					"description": "The library directories passed to icpp interpreter, multiple paths should be separated by ','.",
+					"default": ""
+				},
+				"icpp.frameworkdirs": {
+					"type": "string",
+					"description": "The framework directories passed to icpp interpreter, multiple paths should be separated by ','.",
+					"default": ""
+				},
+				"icpp.shlibs": {
+					"type": "string",
+					"description": "The full name of the dependent dynamic libraries passed to icpp interpreter, multiple files should be separated by ','.",
+					"default": ""
+				},
+				"icpp.frameworks": {
+					"type": "string",
+					"description": "The framework name of the dependent libraries passed to icpp interpreter, multiple names should be separated by ','.",
+					"default": ""
+				},
+				"icpp.ip": {
+					"type": "string",
+					"description": "The running icpp-gadget/icpp-server's IP address.",
+					"default": "127.0.0.1"
+				},
+				"icpp.port": {
+					"type": "string",
+					"description": "The running icpp-gadget/icpp-server's port.",
+					"default": "24703"
+				},
+				"icpp.ndk": {
+					"type": "string",
+					"description": "The android ndk root path, default to the parent directory of the ndk-build in PATH.",
+					"default": ""
+				},
+				"icpp.logging": {
+					"type": "boolean",
+					"description": "Log the icpp related sub process or not.",
+					"default": true
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "extension.icpp.run",
+				"title": "ICPP - Run"
+			},
+			{
+				"command": "extension.icpp.fire",
+				"title": "ICPP - Fire"
+			},
+			{
+				"command": "extension.icpp.format",
+				"title": "ICPP - Format"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.icpp.run",
+				"key": "ctrl+r",
+				"mac": "cmd+r",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "extension.icpp.fire",
+				"key": "ctrl+f",
+				"mac": "cmd+f",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "extension.icpp.format",
+				"key": "ctrl+shift+f",
+				"mac": "cmd+shift+f",
+				"when": "editorTextFocus"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint \"src/**/*.ts\"",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^18",
+		"@types/vscode": "^1.73.0",
+		"@typescript-eslint/eslint-plugin": "^7.14.0",
+		"@typescript-eslint/parser": "^7.14.0",
+		"eslint": "^8.26.0",
+		"typescript": "^5.5.2"
+	}
+}
