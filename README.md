@@ -1,6 +1,24 @@
 # ICPP-VSCode
 Interpreting C++ in vscode with the [icpp](https://github.com/vpand/icpp) backend, and writes the execution result into the Output/ICPP channel.
 
+## Command
+The icpp commands will be activated when an opened C/C++ document is focused. The extra flags or script arguments can be specified in the icpp extension settings.
+|Command|Shortcut|Action|
+|-|-|-|
+| **Run**   | ctrl/cmd+r       | icpp opened.cc |
+| **Fire**  | ctrl/cmd+shift+f | iopad --fire=opened.cc |
+| **Format**| alt+shift+f      | icpp -f opened.cc |
+
+## Setting
+If the command line icpp and iopad aren't in your system PATH environment, you'd set the icpp package root in this configuration field and restart VSCode or ICPP Extension to apply it.
+
+![Setting/Root](https://raw.githubusercontent.com/vpand/icpp-vscode/main/images/icpproot.png)
+
+## Output
+The execution output of the icpp script will be written into the Output/ICPP channel.
+
+![Output/ICPP](https://raw.githubusercontent.com/vpand/icpp-vscode/main/images/output.png)
+
 ## ICPP - Running C++ in anywhere like a script
 **Interpreting C++, executing the source and executable like a script.**
  * Writing powerful script using C++ just as easy as Python;

@@ -40,6 +40,10 @@ class ICPP {
 		return this.getConfigBool('a.logging');
 	}
 
+	logRaw(msg: string) {
+		this.output.append(msg);
+	}
+
 	log(msg: string) {
 		this.output.appendLine(msg);
 	}
@@ -71,8 +75,8 @@ class ICPP {
 	
 		cp.exec(cmd, (error, stdout, stderr) => {
 			if (error) this.log(error.message);
-			if (stdout.length) this.log(stdout);
-			if (stderr.length) this.log(stderr);
+			if (stdout.length) this.logRaw(stdout);
+			if (stderr.length) this.logRaw(stderr);
 		});
 	}
 
@@ -89,10 +93,10 @@ class ICPP {
 			this.log(err.message);
 		});
 		child.stdout.on('data', (data) => {
-	  	this.log(data);
+	  	this.logRaw(data);
 		});
 		child.stderr.on('data', (data) => {
-  	  this.log(data);
+  	  this.logRaw(data);
 		});
 		if (child.exitCode)
 			this.log('Failed to execute the command, exit code is ' + child.exitCode + '.');
@@ -103,7 +107,8 @@ class ICPP {
 		if (!activeTextEditor)
 			return;
 		let activeDocument = activeTextEditor.document;
-		if (activeDocument.languageId != 'cpp')
+		if (activeDocument.languageId != 'cpp' &&
+			  activeDocument.languageId != "c")
 			return;
 
 		activeDocument.save().then(() => {
