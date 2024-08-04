@@ -40,8 +40,8 @@ class ICPP {
 		return this.getConfigBool('a.logging');
 	}
 
-	logRaw(msg: string) {
-		this.output.append(msg);
+	logRaw(msg: any) {
+		this.output.append(String(msg));
 	}
 
 	log(msg: string) {
